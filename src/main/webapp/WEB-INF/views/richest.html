@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Richest</title>
+    </head>
+    <body>
+        <table border="2" cellspacing="0">
+            <tr th:if="${users.isEmpty()}">
+                <td colspan="2"> No users Available </td>
+            </tr>
+            <tr>
+                <td>User ID</td>
+                <td>User Name</td>
+                <td>User SureName</td>
+                <td>User Accounts</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td><span th:text="${user.userId}"> Title </span></td>
+                <td><span th:text="${user.name}"> Title </span></td>
+                <td><span th:text="${user.getSurename()}"> Title </span></td>
+                <td>
+                    <table border="1" cellspacing="0">
+                        <tr>
+                            <td>Account ID</td>
+                            <td>Account</td>
+                        </tr>
+                        <tr th:each="account: ${accounts}" th:if="${account.userId} == ${user.userId}">
+                            <td><span th:text="${account.accountId}"> Title </span></td>
+                            <td><span th:text="${account.account}"> Title </span></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+        Richest Users:
+        <table border="2">
+            <tr th:if="${richests.isEmpty()}">
+                <td colspan="2"> No users Available </td>
+            </tr>
+            <tr>
+                <td>User ID</td>
+                <td>User Name</td>
+                <td>User SureName</td>
+                <td>Total User Account</td>
+            </tr>
+
+            <tr th:each="richest : ${richests}">
+                <td><span th:text="${richest.userId}"> Title </span></td>
+                <td><span th:text="${richest.name}"> Title </span></td>
+                <td><span th:text="${richest.getSurename()}"> Title </span></td>
+                <td><span th:text="${richestAccount}"> Title </span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    Total account :
+                </td>
+                <td>
+                    <span th:text="${totalAccountSum}"></span>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+</html>

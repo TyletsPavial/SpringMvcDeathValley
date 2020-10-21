@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Accounts</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div hidden>
+            <form method="post" action="addUser">
+                Name:<input type="text" name="name">
+                SureName:<input type="text" name="sureName">
+                <button type="submit">add user</button>
+            </form>
+                <form method="post" action="addAccount">
+                    Account:<input type="text" name="account">
+                    UserId:<input type="text" name="userId">
+                    <button type="submit">add account</button>
+            </form>
+        </div>
+
+        <table border="2" cellspacing="0">
+
+            <tr>
+                <td>User ID</td>
+                <td>User Name</td>
+                <td>User SureName</td>
+                <td>User Accounts</td>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td><span th:text="${user.getUserId()}"> Title </span></td>
+                <td><span th:text="${user.getName()}"> Title </span></td>
+                <td><span th:text="${user.getSurename()}"> Title </span></td>
+                <td>
+                    <table border="1" cellspacing="0">
+                        <tr>
+                            <td>Account ID</td>
+                            <td>Account</td>
+                        </tr>
+                        <tr th:each="account: ${accounts}" th:if="${account.userId} == ${user.userId}">
+                            <td><span th:text="${account.accountId}"> Title </span></td>
+                            <td><span th:text="${account.account}"> Title </span></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+            <a href="/getRichest"><button>getRichest</button></a>
+
+    </body>
+</html>
